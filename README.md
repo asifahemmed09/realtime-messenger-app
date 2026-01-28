@@ -2,7 +2,7 @@
 
 A modern, feature-rich real-time messaging application built with cutting-edge web technologies. This application demonstrates advanced concepts in real-time communication, state management, and full-stack development.
 
-🔗 **[Live Demo](#)** | 📖 **[Documentation](#)** | 🐛 **[Report Issues](#)**
+🔗 **[Live Demo](https://realtime-messenger-app-1.onrender.com/)**
 
 ## ✨ Features
 
@@ -37,7 +37,7 @@ A modern, feature-rich real-time messaging application built with cutting-edge w
 
 ### Frontend
 
-- **React 18**: UI library with hooks and functional components
+- **React 19**: UI library with hooks and functional components
 - **TypeScript**: Type-safe development
 - **Vite**: Fast build tool and dev server
 - **Tailwind CSS**: Utility-first CSS framework
@@ -115,7 +115,7 @@ realtime-messenger-app/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/realtime-messenger-app.git
+git clone https://github.com/asifahemmed09/realtime-messenger-app.git
 cd realtime-messenger-app
 ```
 
@@ -372,11 +372,11 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Asif Ahemmed**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
-- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
+- GitHub: [@asifahemmed09](https://github.com/asifahemmed09)
+- Email: asifahemmed.dev@gmail.com
+- LinkedIn: [Asif Ahemmed](https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/asif-ahemmed-2a8760393/))
 
 ## 🙏 Acknowledgments
 
@@ -390,8 +390,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Have questions or issues?
 
-- Open an issue on [GitHub Issues](https://github.com/yourusername/realtime-messenger-app/issues)
-- Contact: your.email@example.com
+- Open an issue on [GitHub Issues](https://github.com/asifahemmed09/realtime-messenger-app/issues)
+- Contact: asifahemmed.dev.com
 
 ---
 
