@@ -1,9 +1,10 @@
-import { getOtherUserAndGroup } from "@/lib/helper";
-import { PROTECTED_ROUTES } from "@/routes/routes";
-import type { ChatType } from "@/types/chat.type";
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import AvatarWithBadge from "../avatar-with-badge";
+import { useSocket } from '@/hooks/use-socket';
+import { getOtherUserAndGroup } from '@/lib/helper';
+import { PROTECTED_ROUTES } from '@/routes/routes';
+import type { ChatType } from '@/types/chat.type';
+import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import AvatarWithBadge from '../avatar-with-badge';
 
 interface Props {
   chat: ChatType;
@@ -11,9 +12,11 @@ interface Props {
 }
 const ChatHeader = ({ chat, currentUserId }: Props) => {
   const navigate = useNavigate();
+  const { onlineUsers } = useSocket();
   const { name, subheading, avatar, isOnline, isGroup } = getOtherUserAndGroup(
     chat,
-    currentUserId
+    currentUserId,
+    onlineUsers
   );
 
   return (
@@ -43,7 +46,7 @@ const ChatHeader = ({ chat, currentUserId }: Props) => {
           <h5 className="font-semibold">{name}</h5>
           <p
             className={`text-sm ${
-              isOnline ? "text-green-500" : "text-muted-foreground"
+              isOnline ? 'text-green-500' : 'text-muted-foreground'
             }`}
           >
             {subheading}

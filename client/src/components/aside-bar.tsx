@@ -1,24 +1,25 @@
-import { useAuth } from "@/hooks/use-auth";
-import { useTheme } from "./theme-provider";
-import { isUserOnline } from "@/lib/helper";
-import Logo from "./logo";
-import { PROTECTED_ROUTES } from "@/routes/routes";
-import { Button } from "./ui/button";
-import { Moon, Sun } from "lucide-react";
+import { useAuth } from '@/hooks/use-auth';
+import { useSocket } from '@/hooks/use-socket';
+import { PROTECTED_ROUTES } from '@/routes/routes';
+import { Moon, Sun } from 'lucide-react';
+import AvatarWithBadge from './avatar-with-badge';
+import Logo from './logo';
+import { useTheme } from './theme-provider';
+import { Button } from './ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import AvatarWithBadge from "./avatar-with-badge";
+} from './ui/dropdown-menu';
 
 const AsideBar = () => {
   const { user, logout } = useAuth();
   const { theme, setTheme } = useTheme();
+  const { onlineUsers } = useSocket();
 
-  const isOnline = isUserOnline(user?._id);
+  const isOnline = onlineUsers.includes(user?._id || '');
 
   return (
     <aside
@@ -48,7 +49,7 @@ const AsideBar = () => {
             variant="outline"
             size="icon"
             className="border-0 rounded-full"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           >
             <Sun
               className="
@@ -77,8 +78,8 @@ const AsideBar = () => {
               <div role="button">
                 {/* {Avatar} */}
                 <AvatarWithBadge
-                  name={user?.name || "unKnown"}
-                  src={user?.avatar || ""}
+                  name={user?.name || 'unKnown'}
+                  src={user?.avatar || ''}
                   isOnline={isOnline}
                   className="!bg-white"
                 />

@@ -1,18 +1,18 @@
-import { memo, useEffect, useState } from "react";
-import { useChat } from "@/hooks/use-chat";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Button } from "../ui/button";
-import { ArrowLeft, PenBoxIcon, Search, UsersIcon } from "lucide-react";
+import { useChat } from '@/hooks/use-chat';
+import { ArrowLeft, PenBoxIcon, Search, UsersIcon } from 'lucide-react';
+import { memo, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import type { UserType } from '../../types/auth.type';
+import AvatarWithBadge from '../avatar-with-badge';
+import { Button } from '../ui/button';
+import { Checkbox } from '../ui/checkbox';
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "../ui/input-group";
-import { Spinner } from "../ui/spinner";
-import type { UserType } from "../../types/auth.type";
-import AvatarWithBadge from "../avatar-with-badge";
-import { Checkbox } from "../ui/checkbox";
-import { useNavigate } from "react-router-dom";
+} from '../ui/input-group';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Spinner } from '../ui/spinner';
 
 export const NewChatPopover = memo(() => {
   const navigate = useNavigate();
@@ -21,7 +21,8 @@ export const NewChatPopover = memo(() => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isGroupMode, setIsGroupMode] = useState(false);
-  const [groupName, setGroupName] = useState("");
+  const [groupName, setGroupName] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
 
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
@@ -36,13 +37,19 @@ export const NewChatPopover = memo(() => {
     );
   };
 
+  const filteredUsers =
+    users?.filter((user) =>
+      user.name?.toLowerCase().includes(searchQuery.toLowerCase())
+    ) || [];
+
   const handleBack = () => {
     resetState();
   };
 
   const resetState = () => {
     setIsGroupMode(false);
-    setGroupName("");
+    setGroupName('');
+    setSearchQuery('');
     setSelectedUsers([]);
   };
 
@@ -107,17 +114,19 @@ export const NewChatPopover = memo(() => {
               </Button>
             )}
             <h3 className="text-lg font-semibold">
-              {isGroupMode ? "New Group" : "New Chat"}
+              {isGroupMode ? 'New Group' : 'New Chat'}
             </h3>
           </div>
 
           <InputGroup>
             <InputGroupInput
-              value={isGroupMode ? groupName : ""}
-              onChange={
-                isGroupMode ? (e) => setGroupName(e.target.value) : undefined
+              value={isGroupMode ? groupName : searchQuery}
+              onChange={(e) =>
+                isGroupMode
+                  ? setGroupName(e.target.value)
+                  : setSearchQuery(e.target.value)
               }
-              placeholder={isGroupMode ? "Enter group name" : "Search name"}
+              placeholder={isGroupMode ? 'Enter group name' : 'Search name'}
             />
             <InputGroupAddon>
               {isGroupMode ? <UsersIcon /> : <Search />}
@@ -142,7 +151,7 @@ export const NewChatPopover = memo(() => {
                 disabled={isCreatingChat}
                 onClick={() => setIsGroupMode(true)}
               />
-              {users?.map((user) => (
+              {filteredUsers?.map((user) => (
                 <ChatUserItem
                   key={user._id}
                   user={user}
@@ -153,7 +162,7 @@ export const NewChatPopover = memo(() => {
               ))}
             </>
           ) : (
-            users?.map((user) => (
+            filteredUsers?.map((user) => (
               <GroupUserItem
                 key={user._id}
                 user={user}
@@ -184,11 +193,11 @@ export const NewChatPopover = memo(() => {
     </Popover>
   );
 });
-NewChatPopover.displayName = "NewChatPopover";
+NewChatPopover.displayName = 'NewChatPopover';
 
 const UserAvatar = memo(({ user }: { user: UserType }) => (
   <>
-    <AvatarWithBadge name={user.name} src={user.avatar ?? ""} />
+    <AvatarWithBadge name={user.name} src={user.avatar ?? ''} />
     <div className="flex-1 min-w-0">
       <h5 className="text-[13.5px] font-medium truncate">{user.name}</h5>
       <p className="text-xs text-muted-foreground">Hey there! I'm using whop</p>
@@ -196,7 +205,7 @@ const UserAvatar = memo(({ user }: { user: UserType }) => (
   </>
 ));
 
-UserAvatar.displayName = "UserAvatar";
+UserAvatar.displayName = 'UserAvatar';
 
 const NewGroupItem = memo(
   ({ disabled, onClick }: { disabled: boolean; onClick: () => void }) => (
@@ -216,7 +225,7 @@ const NewGroupItem = memo(
   )
 );
 
-NewGroupItem.displayName = "NewGroupItem";
+NewGroupItem.displayName = 'NewGroupItem';
 
 const ChatUserItem = memo(
   ({
@@ -244,7 +253,7 @@ const ChatUserItem = memo(
   )
 );
 
-ChatUserItem.displayName = "ChatUserItem";
+ChatUserItem.displayName = 'ChatUserItem';
 
 const GroupUserItem = memo(
   ({
@@ -272,4 +281,4 @@ const GroupUserItem = memo(
   )
 );
 
-GroupUserItem.displayName = "GroupUserItem";
+GroupUserItem.displayName = 'GroupUserItem';

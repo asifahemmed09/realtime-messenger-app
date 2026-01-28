@@ -1,13 +1,12 @@
-import mongoose from "mongoose";
-import cloudinary from "../config/cloudinary.config";
-import ChatModel from "../models/chat.model";
-import MessageModel from "../models/message.model";
-import { BadRequestException, NotFoundException } from "../utils/app-error";
+import mongoose from 'mongoose';
+import cloudinary from '../config/cloudinary.config';
 import {
   emitLastMessageToParticipants,
   emitNewMessageToChatRoom,
-} from "../lib/socket";
-import UserModel from "../models/user.model";
+} from '../lib/socket';
+import ChatModel from '../models/chat.model';
+import MessageModel from '../models/message.model';
+import { BadRequestException, NotFoundException } from '../utils/app-error';
 
 export const sendMessageService = async (
   userId: string,
@@ -26,14 +25,14 @@ export const sendMessageService = async (
       $in: [userId],
     },
   });
-  if (!chat) throw new BadRequestException("Chat not found or unauthorized");
+  if (!chat) throw new BadRequestException('Chat not found or unauthorized');
 
   if (replyToId) {
     const replyMessage = await MessageModel.findOne({
       _id: replyToId,
       chatId,
     });
-    if (!replyMessage) throw new NotFoundException("Reply message not found");
+    if (!replyMessage) throw new NotFoundException('Reply message not found');
   }
 
   let imageUrl;
@@ -53,13 +52,13 @@ export const sendMessageService = async (
   });
 
   await newMessage.populate([
-    { path: "sender", select: "name avatar" },
+    { path: 'sender', select: '_id name avatar' },
     {
-      path: "replyTo",
-      select: "content image sender",
+      path: 'replyTo',
+      select: 'content image sender',
       populate: {
-        path: "sender",
-        select: "name avatar",
+        path: 'sender',
+        select: '_id name avatar',
       },
     },
   ]);

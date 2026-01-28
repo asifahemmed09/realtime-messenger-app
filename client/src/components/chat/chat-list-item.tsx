@@ -1,9 +1,10 @@
-import { getOtherUserAndGroup } from "@/lib/helper";
-import { cn } from "@/lib/utils";
-import type { ChatType } from "@/types/chat.type";
-import { useLocation } from "react-router-dom";
-import AvatarWithBadge from "../avatar-with-badge";
-import { formatChatTime } from "../../lib/helper";
+import { useSocket } from '@/hooks/use-socket';
+import { getOtherUserAndGroup } from '@/lib/helper';
+import { cn } from '@/lib/utils';
+import type { ChatType } from '@/types/chat.type';
+import { useLocation } from 'react-router-dom';
+import { formatChatTime } from '../../lib/helper';
+import AvatarWithBadge from '../avatar-with-badge';
 
 interface PropsType {
   chat: ChatType;
@@ -12,27 +13,29 @@ interface PropsType {
 }
 const ChatListItem = ({ chat, currentUserId, onClick }: PropsType) => {
   const { pathname } = useLocation();
+  const { onlineUsers } = useSocket();
   const { lastMessage, createdAt } = chat;
 
   const { name, avatar, isOnline, isGroup } = getOtherUserAndGroup(
     chat,
-    currentUserId
+    currentUserId,
+    onlineUsers
   );
 
   const getLastMessageText = () => {
     if (!lastMessage) {
       return isGroup
         ? chat.createdBy === currentUserId
-          ? "Group created"
-          : "You were added"
-        : "Send a message";
+          ? 'Group created'
+          : 'You were added'
+        : 'Send a message';
     }
-    if (lastMessage.image) return "📷 Photo";
+    if (lastMessage.image) return '📷 Photo';
 
     if (isGroup && lastMessage.sender) {
       return `${
         lastMessage.sender._id === currentUserId
-          ? "You"
+          ? 'You'
           : lastMessage.sender.name
       }: ${lastMessage.content}`;
     }
@@ -46,7 +49,7 @@ const ChatListItem = ({ chat, currentUserId, onClick }: PropsType) => {
       className={cn(
         `w-full flex items-center gap-2 p-2 rounded-sm
          hover:bg-sidebar-accent transition-colors text-left`,
-        pathname.includes(chat._id) && "!bg-sidebar-accent"
+        pathname.includes(chat._id) && '!bg-sidebar-accent'
       )}
     >
       <AvatarWithBadge
