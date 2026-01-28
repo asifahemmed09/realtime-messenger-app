@@ -1,0 +1,52 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.env.example
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+*.log
+.cache/
+
+# OS specific files
+Thumbs.db
+.DS_Store
+
+# Backend specific
+backend/dist/
+backend/node_modules/
+
+# Frontend specific
+client/dist/
+client/node_modules/
+client/.vite/
+client/.eslintcache
+
+# Temporary files
+*.tmp
+.temp/
