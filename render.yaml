@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: realtime-messenger-backend
+    runtime: node
+    plan: free
+    buildCommand: bash build.sh
+    startCommand: cd backend && node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+  - type: static
+    name: realtime-messenger-client
+    runtime: node
+    plan: free
+    buildCommand: bash build.sh
+    staticPublishPath: client/dist
