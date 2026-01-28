@@ -391,7 +391,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Have questions or issues?
 
 - Open an issue on [GitHub Issues](https://github.com/asifahemmed09/realtime-messenger-app/issues)
-- Contact: asifahemmed.dev.com
+- Contact: asifahemmed.dev@gmail.com
 
 ---
 
