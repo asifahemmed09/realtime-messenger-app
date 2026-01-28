@@ -7,8 +7,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Environment variables
-.env
-.env.local
 .env.*.local
 
 # Build outputs
@@ -50,3 +48,6 @@ client/.eslintcache
 # Temporary files
 *.tmp
 .temp/
+config.bat
+temp_auto_push.bat
+temp_interactive_push.bat
