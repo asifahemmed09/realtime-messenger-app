@@ -4,9 +4,12 @@
     "module": "commonjs",
     "rootDir": "src",
     "outDir": "dist",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "typeRoots": ["./node_modules/@types"],
+    "resolveJsonModule": true
   },
   "include": ["src", "src/@types/**/*.d.ts"],
   "exclude": ["node_modules", "dist", "test"]

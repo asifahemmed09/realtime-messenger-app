@@ -6,7 +6,7 @@ echo "Building realtime-messenger-app..."
 # Build client
 echo "Installing client dependencies..."
 cd client
-npm install
+npm ci
 echo "Building client..."
 npm run build
 cd ..
@@ -14,7 +14,7 @@ cd ..
 # Build backend
 echo "Installing backend dependencies..."
 cd backend
-npm install
+npm ci
 echo "Building backend..."
 npm run build
 cd ..
